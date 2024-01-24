@@ -14,7 +14,7 @@ export class SvgService {
   }
 
   getSvg(path: string): Observable<any> {
-    return this.httpClient.get(`assets/img/${path}.svg`, { responseType: 'text' });
+    return this.httpClient.get(`assets/img/${path}.svg`, { responseType: 'text' }).pipe(take(1));
   }
 
 }

@@ -12,6 +12,7 @@ export class SvgComponent{
   @Input() plano: any;
   @Input() desc: any;
   @Input() svgIcon: any;
+  @Input() svgIcon2: any;
 
   constructor() {
   }

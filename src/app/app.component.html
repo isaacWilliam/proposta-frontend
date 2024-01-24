@@ -1,29 +1,30 @@
+
 <div class="hidden-print p-3 w-full">
-  <div class="grid">
-    <div class="col-12 md:col-6 p-1">
-      <div class="flex flex-column gap-1 height-div">
-        <label>Nome Plano</label>
-        <p-dropdown [options]="planos" [(ngModel)]="planoEscolhido" optionLabel="name" optionValue="name" name="plano" [showClear]="true" placeholder="Selecione"></p-dropdown>
-      </div>
+  <div class="flex flex-row flex-wrap">
+    <div class="flex flex-column height-div gap-1 p-2 pl-0" style="width: 190px">
+      <label>Nome Plano</label>
+      <p-dropdown [options]="planos" [(ngModel)]="planoEscolhido" optionLabel="name" optionValue="name" name="plano" [showClear]="true" placeholder="Selecione"></p-dropdown>
     </div>
-    <div class="col-12 md:col-6 p-1">
-      <div class="flex flex-column gap-1 height-div">
-        <label>Desconto</label>
-        <div class="flex flex-row" *ngIf="planoEscolhido">
-          <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
-            <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="selecionarDesconto"></p-radioButton>
-            <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
-          </div>
+    <div class="flex flex-column height-div gap-1 p-2" style="width: 250px">
+      <label>Desconto</label>
+      <div class="flex flex-row pt-3" *ngIf="svgPlano.length > 0">
+        <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
+          <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="selecionarDesconto" (click)="changeDesconto()"></p-radioButton>
+          <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
         </div>
       </div>
     </div>
+    <div class="p-2 pt-3 flex align-self-center">
+      <button pButton class="p-button-secondary"  (click)="changePlano()" type="button" label="Enviar Escolha"></button>
+      <!--        [disabled]="form.invalid"-->
+    </div>
   </div>
-  <form #form="ngForm">
+  <form #form="ngForm" class="mt-2">
     <div class="grid">
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label For="nome">Nome Cliente</label>
-          <input pInputText id="nome" name="nome" (change)="changeInput($event, 'cliente', ':')" [(ngModel)]="formulario.nome"/>
+          <label For="nome">Nome do Cliente</label>
+          <input pInputText id="nome" name="nome" (change)="changeInput($event, 'cliente')" [(ngModel)]="formulario.nome"/>
 <!--          <ng-template [ngIf]="verificaErro(form.controls['nome'])">-->
 <!--            <small>Nome é obrigatório!</small>-->
 <!--          </ng-template>-->
@@ -31,8 +32,8 @@
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label For="email">Nome do Plano</label>
-          <input pInputText id="email" name="email" (change)="changeInput($event, 'plano', '')" [(ngModel)]="formulario.email"/>
+          <label For="plano">Nome do Plano</label>
+          <input pInputText id="plano" name="email" (change)="changeInput($event, 'plano')" [(ngModel)]="formulario.plano"/>
           <!--        pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/"-->
 <!--          <ng-template [ngIf]="verificaErro(form.controls['email'])">-->
 <!--            <small>E-mail é obrigatório!</small>-->
@@ -41,12 +42,12 @@
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label For="cep">CEP</label>
-          <input pInputText id="cep" name="cep" [(ngModel)]="formulario.cep"/>
-<!--          (blur)="getApiViaCep(form.controls['cep'].value)"-->
-<!--          <ng-template [ngIf]="verificaErro(form.controls['cep'])">-->
-<!--            <small>CEP é obrigatório!</small>-->
-<!--          </ng-template>-->
+          <label For="usuario">Nº de Usuários</label>
+          <input pInputText id="usuario" name="usuario" (change)="changeInput($event, 'usuarios')" [(ngModel)]="formulario.usuarios"/>
+          <!--        pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/"-->
+          <!--          <ng-template [ngIf]="verificaErro(form.controls['email'])">-->
+          <!--            <small>E-mail é obrigatório!</small>-->
+          <!--          </ng-template>-->
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
@@ -100,13 +101,54 @@
 <!--          </ng-template>-->
         </div>
       </div>
-      <div class="col-12 py-2 pl-2">
+      <div class="col-12 py-2 pl-1">
         <button pButton class="p-button-secondary"  (click)="openPrint()"  type="submit" label="Salvar"></button>
 <!--        [disabled]="form.invalid"-->
       </div>
+      <div class="flex flex-row">
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',1 )"  type="submit" label="pg1"></button>-->
+<!--          &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',2 )"  type="submit" label="pg2"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',3 )"  type="submit" label="pg3"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',4 )"  type="submit" label="pg4"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',5 )"  type="submit" label="pg5"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',6 )"  type="submit" label="pg6"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',7 )"  type="submit" label="pg7"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',8 )"  type="submit" label="pg8"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="pl-1 py-2">-->
+<!--          <button pButton class="p-button-secondary"  (click)=" getSvgByCase('premium',9 )"  type="submit" label="pg9"></button>-->
+<!--        &lt;!&ndash;        [disabled]="form.invalid"&ndash;&gt;-->
+<!--        </div>-->
+      </div>
+
     </div>
   </form>
 </div>
-<div *ngIf="svgIcon.length != 0">
-  <app-svg [svgIcon]="svgIcon"></app-svg>
+<div>
+  <div *ngFor="let svg of svgPlano">
+    <div [innerHtml]="svg"></div>
+  </div>
 </div>
