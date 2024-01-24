@@ -52,11 +52,23 @@
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label For="logradouro">Rua</label>
-          <input pInputText id="logradouro" name="logradouro" [(ngModel)]="formulario.logradouro"/>
-<!--          <ng-template [ngIf]="verificaErro(form.controls['logradouro'])">-->
-<!--            <small>Rua é obrigatório!</small>-->
-<!--          </ng-template>-->
+          <label>Incluso</label>
+          <div>
+            <p-checkbox [(ngModel)]="formulario.checked" name="checked" [binary]="true" inputId="ck1"></p-checkbox>
+            <label [for]="'ck1'">New York</label>
+          </div>
+          <div>
+            <p-checkbox [(ngModel)]="formulario.checked2" name="checked2" [binary]="true" inputId="ck2"></p-checkbox>
+            <label [for]="'ck1'">New York</label>
+          </div>
+          <div>
+            <p-checkbox [(ngModel)]="formulario.checked3" name="checked3" [binary]="true" inputId="ck3"></p-checkbox>
+            <label [for]="'ck1'">New York</label>
+          </div>
+          <div>
+            <p-checkbox [(ngModel)]="formulario.checked4" name="checked4" [binary]="true" inputId="ck4"></p-checkbox>
+            <label [for]="'ck1'">New York</label>
+          </div>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">

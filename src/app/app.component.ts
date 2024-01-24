@@ -36,8 +36,14 @@ export class AppComponent {
     bairro: '',
     uf: '',
     localidade: '',
-    complemento: null
+    complemento: null,
+    checked: false,
+    checked2: false,
+    checked3: false,
+    checked4: false
   }
+
+
 
   svgPlano: any[] = [];
 
