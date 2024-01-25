@@ -4,11 +4,20 @@
       <label>Nome Plano</label>
       <p-dropdown [options]="planos" [(ngModel)]="planoEscolhido" optionLabel="name" optionValue="name" name="plano" [showClear]="true" placeholder="Selecione"></p-dropdown>
     </div>
-    <div class="flex flex-column height-div gap-1 p-2" style="width: 250px">
+    <div class="flex flex-column height-div gap-1 p-2" style="width: 190px" *ngIf="svgPlano.length > 0">
       <label>Desconto</label>
-      <div class="flex flex-row pt-3" *ngIf="svgPlano.length > 0">
+      <div class="flex flex-row pt-3">
         <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
           <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="selecionarDesconto" (click)="changeDesconto()"></p-radioButton>
+          <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column height-div gap-1 p-2" style="width: 190px" *ngIf="svgPlano.length > 0">
+      <label>Personalizado</label>
+      <div class="flex flex-row pt-3">
+        <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
+          <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="personalizado" (click)="changeNomePrincipal()"></p-radioButton>
           <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
         </div>
       </div>
@@ -17,39 +26,19 @@
       <button pButton class="p-button-secondary"  (click)="changePlano()" type="button" label="Carregar Plano"></button>
     </div>
   </div>
-  <form #form="ngForm" class="mt-2 sticky top-0" *ngIf="svgPlano.length > 0">
+  <form #form="ngForm" class="mt-2 sticky top-0" style="min-height: 415px" *ngIf="svgPlano.length > 0">
     <div class="grid">
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
           <label For="nome">Nome do Cliente</label>
-          <input pInputText id="nome" name="nome" (change)="changeInput($event, 'cliente')" [(ngModel)]="formulario.nome"/>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label For="plano">Nome do Plano</label>
-          <input pInputText id="plano" name="email" (change)="changeInput($event, 'plano')" [(ngModel)]="formulario.plano"/>
+          <input pInputText id="nome" name="nome" (change)="changeInput($event, 'cliente')" [(ngModel)]="formulario.cliente"/>
         </div>
       </div>
       <div class="col-12 sm:col-6 md:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
           <label>Nº de Usuários</label>
-          <p-inputNumber [style]="{'min-width': '100px'}" styleClass="w-full" class="w-full" [(ngModel)]="formulario.usuarios" name="usuario" mode="decimal"
-                          [useGrouping]="false" (onBlur)="changeInput($event, 'usuarios')"> </p-inputNumber>
-        </div>
-      </div>
-      <div class="col-12 sm:col-6 md:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label>Valor Onboarding</label>
-          <p-inputNumber [style]="{'min-width': '100px'}" styleClass="w-full" [(ngModel)]="formulario.vlOnboarding" name="onboarding" inputId="minmaxfraction" mode="decimal"
-                         [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorOnboarding')"> </p-inputNumber>
-        </div>
-      </div>
-      <div class="col-12 sm:col-6 md:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label>Valor Mensal</label>
-          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.vlMensal" name="mensal" inputId="minmaxfraction" mode="decimal"
-                         [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorMensal')"></p-inputNumber>
+          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.qtdUsuarios" name="usuario" mode="decimal"
+                          [useGrouping]="false" (onBlur)="changeInput($event, 'qtdUsuarios')"> </p-inputNumber>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
@@ -77,15 +66,38 @@
           </div>
         </div>
       </div>
-      <div class="col-12 md:col-6 lg:col-4 p-1" *ngIf="planoEscolhido == 'Premium'">
+      <div class="col-12 sm:col-6 md:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label>Contratos Limitados</label>
-          <div class="flex flex-row pt-3">
-            <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
-              <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="formulario.contratos" (click)="changeContrato()"></p-radioButton>
-              <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
-            </div>
-          </div>
+          <label>Nº de E-mails</label>
+          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.email" name="email" mode="decimal"
+                         [useGrouping]="false" (onBlur)="changeInput($event, 'email')"> </p-inputNumber>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 md:col-4 p-1">
+        <div class="flex flex-column gap-1 height-div">
+          <label>Valor Onboarding</label>
+          <p-inputNumber styleClass="w-full" [(ngModel)]="formulario.vlOnboarding" name="onboarding" inputId="minmaxfraction" mode="decimal"
+                         [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorOnboarding')"> </p-inputNumber>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 md:col-4 p-1">
+        <div class="flex flex-column gap-1 height-div">
+          <label>Valor Mensal</label>
+          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.vlMensal" name="mensal" inputId="minmaxfraction" mode="decimal"
+                         [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorMensal')"></p-inputNumber>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 md:col-4 p-1" *ngIf="planoEscolhido == 'Premium' && personalizado">
+        <div class="flex flex-column gap-1 height-div">
+          <label>Nº de Contratos</label>
+          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.qtdContratos" name="contratos" mode="decimal"
+                         [useGrouping]="false" (onBlur)="changeInput($event, 'qtdContratos')"> </p-inputNumber>
+        </div>
+      </div>
+      <div class="col-12 md:col-6 lg:col-4 p-1">
+        <div class="flex flex-column gap-1 height-div">
+          <label For="obs">Observação</label>
+          <input pInputText id="obs" name="observacao" (blur)="changeInput($event, 'observacao')" [(ngModel)]="formulario.observacao"/>
         </div>
       </div>
       <div class="col-12 py-2 pl-1">
