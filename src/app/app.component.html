@@ -2,7 +2,7 @@
   <div class="flex flex-row flex-wrap">
     <div class="flex flex-column height-div gap-1 p-2 pl-0" style="width: 190px">
       <label>Nome Plano</label>
-      <p-dropdown [options]="planos" [(ngModel)]="planoEscolhido" optionLabel="name" optionValue="name" name="plano" [showClear]="true" placeholder="Selecione"></p-dropdown>
+      <p-dropdown [options]="planos" [(ngModel)]="planoEscolhido" (onClear)="resetForm()" optionLabel="name" optionValue="name" name="plano" [showClear]="true" placeholder="Selecione"></p-dropdown>
     </div>
     <div class="flex flex-column height-div gap-1 p-2" style="width: 190px" *ngIf="svgPlano.length > 0">
       <label>Desconto</label>

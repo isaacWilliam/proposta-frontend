@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-import {SvgService} from "./svg/svg.service";
+import {SvgService} from "./shared/svg.service";
 import * as moment from "moment";
+import {Formulario} from "./model/formulario";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent {
     { name: 'Não', key: false },
   ];
 
-  formulario = {
+  formulario: Formulario = {
     cliente: '',
     qtdUsuarios: 0,
     email: 0,
@@ -147,6 +148,14 @@ export class AppComponent {
         break;
     }
 
+  }
+
+  resetForm(){
+    this.formulario = new Formulario();
+    this.planoEscolhido = '';
+    this.selecionarDesconto = false;
+    this.personalizado = false;
+    this.svgPlano = [];
   }
 
 }
