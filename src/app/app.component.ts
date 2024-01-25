@@ -21,7 +21,7 @@ export class AppComponent {
     { name: 'Personalite', code: 'PSL' }
   ];
 
-  selecionarDesconto: any = null;
+  selecionarDesconto: any = 'n';
   desconto: any[] = [
     { name: 'Sim', key: 's' },
     { name: 'Não', key: 'n' },
@@ -30,17 +30,16 @@ export class AppComponent {
   formulario = {
     nome: '',
     plano: '',
-    usuarios: '',
-    logradouro: '',
+    usuarios: 0,
+    vlMensal: 0,
+    vlOnboarding: 0,
     checked: true,
     checked2: true,
     checked3: true,
     checked4: true,
     checked5: true,
-    contratos: ''
+    contratos: 'n'
   }
-
-
 
   svgPlano: any[] = [];
 
@@ -56,7 +55,6 @@ export class AppComponent {
   changeInput(event: any, idElement: string){
     let nome = event.target.value;
     document.getElementById(idElement)!.innerHTML = `<tspan>${nome.toUpperCase()}</tspan>`;
-
   }
 
   changePlano(){
@@ -130,35 +128,27 @@ export class AppComponent {
   }
 
   changeContrato(){
-    console.log(this.formulario.contratos)
-    // document.getElementById('contrato')!.innerHTML = this.formulario.contratos ?
-    //   `*L</text><text class="cls-642" transform="translate(730.12 763.42)">I</text>
-    //     <text class="cls-642" transform="translate(740.63 763.42)">M</text>
-    //     <text class="cls-642" transform="translate(763.19 763.42)">I</text>
-    //     <text class="cls-642" transform="translate(773.46 763.42)">T</text>
-    //     <text class="cls-642" transform="translate(790.65 763.42)">
-    //     <tspan class="cls-643">A</tspan><tspan x="17.95" y="0">D</tspan>
-    //     </text><text class="cls-642" transform="translate(826.58 763.42)">
-    //     <tspan class="cls-644">O</tspan><tspan x="19.91" y="0"> </tspan></text>
-    //     <text class="cls-642" transform="translate(856.12 763.42)"><tspan class="cls-643">A </tspan>
-    //     <tspan x="27.58" y="0"> </tspan></text><text class="cls-642" transform="translate(879.95 763.42)">5</text>
-    //     <text class="cls-642" transform="translate(897.45 763.42)">0</text><text class="cls-642" transform="translate(918.4 763.42)"></text>
-    //     <text class="cls-642" transform="translate(928.03 763.42)">C</text><text class="cls-642" transform="translate(945.47 763.42)">O</text>
-    //     <text class="cls-642" transform="translate(965.4 763.42)">N</text><text class="cls-642" transform="translate(984.5 763.42)">T</text>
-    //     <text class="cls-642" transform="translate(1003.22 763.42)">R</text><text class="cls-642" transform="translate(1020.93 763.42)">A</text>
-    //     <text class="cls-642" transform="translate(1037.13 763.42)">T</text><text class="cls-642" transform="translate(1055.33 763.42)">O</text>
-    //     <text class="cls-642" transform="translate(1075.27 763.42)">S</text><text class="cls-642" transform="translate(768.98 793.42)">A</text>
-    //     <text class="cls-642" transform="translate(785.18 793.42)">T</text><text class="cls-642" transform="translate(804.14 793.42)">I</text>
-    //     <text class="cls-642" transform="translate(814.41 793.42)">V</text><text class="cls-642" transform="translate(831.8 793.42)">O</text>
-    //     <text class="cls-645" transform="translate(851.73 793.42)">S DE<tspan class="cls-646" x="61.87" y="0"> </tspan></text>
-    //     <text class="cls-642" transform="translate(923.22 793.42)"> </text><text class="cls-642" transform="translate(932.85 793.42)">L</text>
-    //     <text class="cls-642" transform="translate(948.69 793.42)">O</text>
-    //     <text class="cls-642" transform="translate(968.62 793.42)">C</text>
-    //     <text class="cls-642" transform="translate(986.57 793.42)">A</text>
-    //     <text class="cls-642" transform="translate(1004.03 793.42)">Ç</text>
-    //     <text class="cls-642" transform="translate(1021.47 793.42)">Õ</text>
-    //     <text class="cls-642" transform="translate(1041.39 793.42)">E</text>
-    //     <text class="cls-642" transform="translate(1058.06 793.42)">S` : ``;
+    document.getElementById('contrato')!.innerHTML = this.formulario.contratos  == 's' ?
+      `<text class="cls-655" transform="translate(694.99 770.98)">*</text><text class="cls-642" transform="translate(713.54 763.42)">L</text><text class="cls-642" transform="translate(730.12 763.42)">I</text>
+        <text class="cls-642" transform="translate(740.63 763.42)">M</text><text class="cls-642" transform="translate(763.19 763.42)">I</text>
+        <text class="cls-642" transform="translate(773.46 763.42)">T</text><text class="cls-642" transform="translate(790.65 763.42)"><tspan class="cls-643">A</tspan>
+        <tspan x="17.95" y="0">D</tspan></text><text class="cls-642" transform="translate(826.58 763.42)"><tspan class="cls-644">O</tspan>
+        <tspan x="19.91" y="0"> </tspan></text><text class="cls-642" transform="translate(856.12 763.42)"><tspan class="cls-643">A </tspan>
+        <tspan x="27.58" y="0"> </tspan></text><text class="cls-642" transform="translate(879.95 763.42)">5</text><text class="cls-642" transform="translate(897.45 763.42)">0</text>
+        <text class="cls-642" transform="translate(918.4 763.42)"> </text><text class="cls-642" transform="translate(928.03 763.42)">C</text><text class="cls-642" transform="translate(945.47 763.42)">O</text>
+        <text class="cls-642" transform="translate(965.4 763.42)">N</text><text class="cls-642" transform="translate(984.5 763.42)">T</text>
+        <text class="cls-642" transform="translate(1003.22 763.42)">R</text><text class="cls-642" transform="translate(1020.93 763.42)">A</text>
+        <text class="cls-642" transform="translate(1037.13 763.42)">T</text><text class="cls-642" transform="translate(1055.33 763.42)">O</text>
+        <text class="cls-642" transform="translate(1075.27 763.42)">S</text><text class="cls-642" transform="translate(768.98 793.42)">A</text>
+        <text class="cls-642" transform="translate(785.18 793.42)">T</text><text class="cls-642" transform="translate(804.14 793.42)">I</text>
+        <text class="cls-642" transform="translate(814.41 793.42)">V</text><text class="cls-642" transform="translate(831.8 793.42)">O</text>
+        <text class="cls-645" transform="translate(851.73 793.42)">S DE<tspan class="cls-646" x="61.87" y="0"> </tspan></text>
+        <text class="cls-642" transform="translate(923.22 793.42)"> </text><text class="cls-642" transform="translate(932.85 793.42)">L</text>
+        <text class="cls-642" transform="translate(948.69 793.42)">O</text><text class="cls-642" transform="translate(968.62 793.42)">C</text>
+        <text class="cls-642" transform="translate(986.57 793.42)">A</text><text class="cls-642" transform="translate(1004.03 793.42)">Ç</text>
+        <text class="cls-642" transform="translate(1021.47 793.42)">Õ</text><text class="cls-642" transform="translate(1041.39 793.42)">E</text>
+        <text class="cls-642" transform="translate(1058.06 793.42)">S
+      </text>` : ``;
   }
 
   changeChecked(value: any, input: number){
@@ -197,3 +187,5 @@ export class AppComponent {
 //               </g>
 //               <text class="cls-837" transform="translate(267.24 835.16)">VÁLIDO POR 48H</text>
 //               <text class="cls-826" transform="translate(268.42 854.25)">*A partir de ${date}</text>`;
+
+// <text class="cls-655" transform="translate(694.99 770.98)">*</text>
