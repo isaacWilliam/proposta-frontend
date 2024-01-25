@@ -51,66 +51,39 @@
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label>Incluso</label>
-          <div>
-            <p-checkbox [(ngModel)]="formulario.checked" name="checked" [binary]="true" inputId="ck1"></p-checkbox>
-            <label [for]="'ck1'">New York</label>
+        <label>Incluso</label>
+        <div class="flex flex-row flex-wrap gap-1 mt-2 height-div">
+          <div class="pr-2">
+            <p-checkbox [(ngModel)]="formulario.checked" (onChange)="changeChecked(formulario.checked, 1)" name="checked" [binary]="true"></p-checkbox>
+            <label>Módulo NFSe</label>
           </div>
-          <div>
-            <p-checkbox [(ngModel)]="formulario.checked2" name="checked2" [binary]="true" inputId="ck2"></p-checkbox>
-            <label [for]="'ck1'">New York</label>
+          <div class="pr-2">
+            <p-checkbox [(ngModel)]="formulario.checked2" (onChange)="changeChecked(formulario.checked2, 2)" name="checked2" [binary]="true"></p-checkbox>
+            <label>Modulo Seguro</label>
           </div>
-          <div>
-            <p-checkbox [(ngModel)]="formulario.checked3" name="checked3" [binary]="true" inputId="ck3"></p-checkbox>
-            <label [for]="'ck1'">New York</label>
+          <div class="pr-2">
+            <p-checkbox [(ngModel)]="formulario.checked3" (onChange)="changeChecked(formulario.checked3, 3)" name="checked3" [binary]="true"></p-checkbox>
+            <label>WhatsApp</label>
           </div>
-          <div>
-            <p-checkbox [(ngModel)]="formulario.checked4" name="checked4" [binary]="true" inputId="ck4"></p-checkbox>
-            <label [for]="'ck1'">New York</label>
+          <div class="pr-2">
+            <p-checkbox [(ngModel)]="formulario.checked4" (onChange)="changeChecked(formulario.checked4, 4)" name="checked4" [binary]="true"></p-checkbox>
+            <label>Gestão</label>
+          </div>
+          <div class="pr-2">
+            <p-checkbox [(ngModel)]="formulario.checked5" (onChange)="changeChecked(formulario.checked5, 5)" name="checked5" [binary]="true"></p-checkbox>
+            <label>Leads</label>
           </div>
         </div>
       </div>
       <div class="col-12 md:col-6 lg:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
-          <label For="numero">Número</label>
-          <input pInputText id="numero" name="numero" [(ngModel)]="formulario.numero"/>
-<!--          <ng-template [ngIf]="verificaErro(form.controls['numero'])">-->
-<!--            <small>Número é obrigatório!</small>-->
-<!--          </ng-template>-->
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label For="bairro">Bairro</label>
-          <input pInputText id="bairro" name="bairro" [(ngModel)]="formulario.bairro"/>
-<!--          <ng-template [ngIf]="verificaErro(form.controls['bairro'])">-->
-<!--            <small>Bairro é obrigatório!</small>-->
-<!--          </ng-template>-->
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label For="complemento">Complemento</label>
-          <input pInputText id="complemento" name="complemento" [(ngModel)]="formulario.complemento" />
-        </div>
-      </div>
-      <div class="col-12 md:col-6 lg:col-4 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label For="localidade">Cidade</label>
-          <input pInputText id="localidade" name="localidade" [(ngModel)]="formulario.localidade"/>
-<!--          <ng-template [ngIf]="verificaErro(form.controls['localidade'])">-->
-<!--            <small>Cidade é obrigatório!</small>-->
-<!--          </ng-template>-->
-        </div>
-      </div>
-      <div class="col-6 p-1">
-        <div class="flex flex-column gap-1 height-div">
-          <label For="uf">UF</label>
-          <input pInputText id="uf" name="uf" [(ngModel)]="formulario.uf"/>
-<!--          <ng-template [ngIf]="verificaErro(form.controls['uf'])">-->
-<!--            <small>UF é obrigatório!</small>-->
-<!--          </ng-template>-->
+          <label>Contratos</label>
+          <div class="flex flex-row pt-3">
+            <div *ngFor="let desc of desconto" class="field-checkbox pr-3">
+              <p-radioButton [inputId]="desc.key" name="desc" [value]="desc.key" [(ngModel)]="formulario.contratos" (click)="changeContrato()"></p-radioButton>
+              <label [for]="desc.key" class="ml-2">{{ desc.name }}</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-12 py-2 pl-1">

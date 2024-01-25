@@ -32,15 +32,12 @@ export class AppComponent {
     plano: '',
     usuarios: '',
     logradouro: '',
-    numero: null,
-    bairro: '',
-    uf: '',
-    localidade: '',
-    complemento: null,
-    checked: false,
-    checked2: false,
-    checked3: false,
-    checked4: false
+    checked: true,
+    checked2: true,
+    checked3: true,
+    checked4: true,
+    checked5: true,
+    contratos: ''
   }
 
 
@@ -130,6 +127,60 @@ export class AppComponent {
     }else{
       document.getElementById('idDesconto')!.innerHTML = '';
     }
+  }
+
+  changeContrato(){
+    console.log(this.formulario.contratos)
+    // document.getElementById('contrato')!.innerHTML = this.formulario.contratos ?
+    //   `*L</text><text class="cls-642" transform="translate(730.12 763.42)">I</text>
+    //     <text class="cls-642" transform="translate(740.63 763.42)">M</text>
+    //     <text class="cls-642" transform="translate(763.19 763.42)">I</text>
+    //     <text class="cls-642" transform="translate(773.46 763.42)">T</text>
+    //     <text class="cls-642" transform="translate(790.65 763.42)">
+    //     <tspan class="cls-643">A</tspan><tspan x="17.95" y="0">D</tspan>
+    //     </text><text class="cls-642" transform="translate(826.58 763.42)">
+    //     <tspan class="cls-644">O</tspan><tspan x="19.91" y="0"> </tspan></text>
+    //     <text class="cls-642" transform="translate(856.12 763.42)"><tspan class="cls-643">A </tspan>
+    //     <tspan x="27.58" y="0"> </tspan></text><text class="cls-642" transform="translate(879.95 763.42)">5</text>
+    //     <text class="cls-642" transform="translate(897.45 763.42)">0</text><text class="cls-642" transform="translate(918.4 763.42)"></text>
+    //     <text class="cls-642" transform="translate(928.03 763.42)">C</text><text class="cls-642" transform="translate(945.47 763.42)">O</text>
+    //     <text class="cls-642" transform="translate(965.4 763.42)">N</text><text class="cls-642" transform="translate(984.5 763.42)">T</text>
+    //     <text class="cls-642" transform="translate(1003.22 763.42)">R</text><text class="cls-642" transform="translate(1020.93 763.42)">A</text>
+    //     <text class="cls-642" transform="translate(1037.13 763.42)">T</text><text class="cls-642" transform="translate(1055.33 763.42)">O</text>
+    //     <text class="cls-642" transform="translate(1075.27 763.42)">S</text><text class="cls-642" transform="translate(768.98 793.42)">A</text>
+    //     <text class="cls-642" transform="translate(785.18 793.42)">T</text><text class="cls-642" transform="translate(804.14 793.42)">I</text>
+    //     <text class="cls-642" transform="translate(814.41 793.42)">V</text><text class="cls-642" transform="translate(831.8 793.42)">O</text>
+    //     <text class="cls-645" transform="translate(851.73 793.42)">S DE<tspan class="cls-646" x="61.87" y="0"> </tspan></text>
+    //     <text class="cls-642" transform="translate(923.22 793.42)"> </text><text class="cls-642" transform="translate(932.85 793.42)">L</text>
+    //     <text class="cls-642" transform="translate(948.69 793.42)">O</text>
+    //     <text class="cls-642" transform="translate(968.62 793.42)">C</text>
+    //     <text class="cls-642" transform="translate(986.57 793.42)">A</text>
+    //     <text class="cls-642" transform="translate(1004.03 793.42)">Ç</text>
+    //     <text class="cls-642" transform="translate(1021.47 793.42)">Õ</text>
+    //     <text class="cls-642" transform="translate(1041.39 793.42)">E</text>
+    //     <text class="cls-642" transform="translate(1058.06 793.42)">S` : ``;
+  }
+
+  changeChecked(value: any, input: number){
+    let incluso = `Incluso na proposta`
+    switch (input){
+      case 1:
+        document.getElementById('prefeitura')!.innerHTML = !value ? `(R$ 50,00 mensais e R$ 500,00 Setup único)` : `(${incluso})`;
+        break;
+      case 2:
+        document.getElementById('seguro')!.innerHTML = !value ? `(R$ 150,00 - Esse módulo vou boniﬁcar pra você)` : `(${incluso})`;
+        break;
+      case 3:
+        document.getElementById('whats')!.innerHTML = !value ? `(R$ 100,00<tspan x="0" y="27.61">mensais com setup de R$ 150,00 investimento único)</tspan>` : `<tspan x="0" y="27.61">(${incluso})</tspan>`;
+        break;
+      case 4:
+        document.getElementById('gestao')!.innerHTML = !value ? `(R$ 50,00 mensais)` : `(${incluso})`;
+        break;
+      case 5:
+        document.getElementById('leads')!.innerHTML = !value ? `(R$ 90,00 mensais)` : `(${incluso})`;
+        break;
+    }
+
   }
 }
 // document.getElementById('idDesconto')!.innerHTML =
