@@ -31,24 +31,24 @@
           <input pInputText id="plano" name="email" (change)="changeInput($event, 'plano')" [(ngModel)]="formulario.plano"/>
         </div>
       </div>
-      <div class="col-12 sm:col-5 md:col-4 p-1">
+      <div class="col-12 sm:col-6 md:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
           <label>Nº de Usuários</label>
-          <p-inputNumber [size]="13" [(ngModel)]="formulario.usuarios" name="usuario" mode="decimal"
+          <p-inputNumber [style]="{'min-width': '100px'}" styleClass="w-full" class="w-full" [(ngModel)]="formulario.usuarios" name="usuario" mode="decimal"
                           [useGrouping]="false" (onBlur)="changeInput($event, 'usuarios')"> </p-inputNumber>
         </div>
       </div>
       <div class="col-12 sm:col-6 md:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
           <label>Valor Onboarding</label>
-          <p-inputNumber [size]="13" [(ngModel)]="formulario.vlOnboarding" name="onboarding" inputId="minmaxfraction" mode="decimal"
+          <p-inputNumber [style]="{'min-width': '100px'}" styleClass="w-full" [(ngModel)]="formulario.vlOnboarding" name="onboarding" inputId="minmaxfraction" mode="decimal"
                          [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorOnboarding')"> </p-inputNumber>
         </div>
       </div>
-      <div class="col-12 sm:col-4 p-1">
+      <div class="col-12 sm:col-6 md:col-4 p-1">
         <div class="flex flex-column gap-1 height-div">
           <label>Valor Mensal</label>
-          <p-inputNumber [(ngModel)]="formulario.vlMensal" name="mensal" inputId="minmaxfraction" mode="decimal"
+          <p-inputNumber styleClass="w-full" class="w-full" [(ngModel)]="formulario.vlMensal" name="mensal" inputId="minmaxfraction" mode="decimal"
                          [minFractionDigits]="2" [maxFractionDigits]="5" (onBlur)="changeInput($event, 'valorMensal')"></p-inputNumber>
         </div>
       </div>

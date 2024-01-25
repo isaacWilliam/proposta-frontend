@@ -13,3 +13,8 @@
   font-family: Brinnan, serif;
 }
 
+::ng-deep {
+  .p-inputtext.p-component.p-element.p-inputnumber-input.p-filled {
+    min-width: 100px
+  }
+}
